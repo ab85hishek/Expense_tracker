@@ -29,6 +29,10 @@ class MyHomePage extends StatelessWidget {
       date: DateTime.now(),
     ),
   ];
+
+  final titleController = TextEditingController();
+  final amountController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +40,7 @@ class MyHomePage extends StatelessWidget {
         title: Text('Flutter App'),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+        //mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Container(
@@ -45,6 +49,33 @@ class MyHomePage extends StatelessWidget {
               color: Colors.blue,
               child: Text('Chart!'),
               elevation: 5,
+            ),
+          ),
+          Card(
+            elevation: 5,
+            child: Container(
+              padding: EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  TextField(
+                    decoration: InputDecoration(labelText: 'Title'),
+                    controller: titleController,
+                  ),
+                  TextField(
+                    decoration: InputDecoration(labelText: 'Amount'),
+                    controller: amountController,
+                  ),
+                  FlatButton(
+                      onPressed: () {
+                        print(titleController.text);
+                        print(amountController.text);
+
+                      },
+                      textColor: Colors.purple,
+                      child: Text('Add Transaction')),
+                ],
+              ),
             ),
           ),
           Column(
@@ -73,26 +104,25 @@ class MyHomePage extends StatelessWidget {
                     ),
                   ),
                   Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                    Text(
-                      tx.title,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                        color: Colors.orange,
-                        
-                      ),
-                    ),
-                    Text(
-                      DateFormat.yMMMd().format(tx.date),
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ])
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          tx.title,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: Colors.orange,
+                          ),
+                        ),
+                        Text(
+                          DateFormat.yMMMd().format(tx.date),
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ])
                 ]),
               );
             }).toList(),
